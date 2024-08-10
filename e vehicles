@@ -1,0 +1,33 @@
+// Define motor control pins
+const int motorPin1 = 7;  // IN1
+const int motorPin2 = 8;  // IN2
+const int enablePin = 9;  // ENA (PWM pin)
+
+// Potentiometer pin
+const int potPin = A0;
+
+void setup() {
+  // Set motor control pins as outputs
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
+  pinMode(enablePin, OUTPUT);
+
+  // Start with the motor stopped
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, LOW);
+}
+
+void loop() {
+  // Read the potentiometer value (0 to 1023)
+  int potValue = analogRead(potPin);
+
+  // Map the potentiometer value to PWM range (0 to 255)
+  int speed = map(potValue, 0, 1023, 0, 255);
+
+  // Set motor direction and speed
+  digitalWrite(motorPin1, HIGH);  // Set motor direction (clockwise)
+  digitalWrite(motorPin2, LOW);
+  analogWrite(enablePin, speed);  // Set motor speed
+
+  // You can implement a stop condition or change direction based on other inputs
+}
